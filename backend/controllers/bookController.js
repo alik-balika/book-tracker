@@ -87,17 +87,22 @@ function validateFieldsForCreateBookRequest(bookRequest) {
 // route    DELETE /api/books/:bookID
 // @access  Private
 const deleteBook = asyncHandler(async (req, res) => {
+  await fetchBookFromDB(req, res);
+  await tryDeletingBook({ _id: req.params.bookID }, res);
+});
+
+async function fetchBookFromDB(req, res) {
   const userID = req.user._id;
   const bookID = { _id: req.params.bookID };
 
-  const book = await Book.findOne(bookID);
+  const book = await Book.findOne(bookID).select("-__v");
   if (book === null || book.userID != userID) {
     res.status(404);
     throw new Error("Book not found");
   }
 
-  await tryDeletingBook(bookID, res);
-});
+  return book;
+}
 
 const tryDeletingBook = async (bookID, res) => {
   try {
@@ -122,4 +127,13 @@ const getBooksByUserID = asyncHandler(async (req, res) => {
   }
 });
 
-export { createBook, deleteBook, getBooksByUserID };
+// @desc    Get book by book ID
+// route    GET /api/books/:bookID
+// @access  Private
+const getBookByBookID = asyncHandler(async (req, res) => {
+  const book = await fetchBookFromDB(req, res);
+
+  res.status(200).json(book);
+});
+
+export { createBook, deleteBook, getBooksByUserID, getBookByBookID };
