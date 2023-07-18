@@ -1,15 +1,10 @@
 import asyncHandler from "express-async-handler";
-import generateToken from "../utils/generateToken.js";
 import Book from "../models/bookModel.js";
 
 // @desc    Create a new book for user in jwt token
-// route    POST /api/users
+// route    POST /api/books
 // @access  Private
 const createBook = asyncHandler(async (req, res) => {
-  // TODO validate required fields and number fields and possibly send proper error messages
-  //      for each error.
-  // TODO also, potentially restructure the error message to have an error code as well and
-  //      maybe return a list of errors so that it's easier on the user
   const bookRequest = {
     userID: req.user._id,
     title: req.body.title,
@@ -20,6 +15,11 @@ const createBook = asyncHandler(async (req, res) => {
     currentPageNumber: req.body.currentPageNumber,
     coverImagePath: req.body.coverImagePath,
   };
+
+  const errors = validateFieldsForCreateBookRequest(bookRequest);
+  if (errors.length !== 0) {
+    res.status(400).json({ message: "Invalid request", errors });
+  }
 
   const book = await Book.create(bookRequest);
 
@@ -39,4 +39,78 @@ const createBook = asyncHandler(async (req, res) => {
   }
 });
 
-export { createBook };
+function validateFieldsForCreateBookRequest(bookRequest) {
+  const errors = [];
+
+  if (!bookRequest.title) {
+    errors.push({
+      source: "title",
+      type: "MISSING_FIELD",
+      message: "Title is required",
+    });
+  }
+
+  if (!bookRequest.author) {
+    errors.push({
+      source: "author",
+      type: "MISSING_FIELD",
+      message: "Author is required",
+    });
+  }
+
+  if (
+    bookRequest.numberOfPages &&
+    !Number.isInteger(Number(bookRequest.numberOfPages))
+  ) {
+    errors.push({
+      source: "numberOfPages",
+      type: "INVALID_NUMBER",
+      message: "Number of pages must be an integer",
+    });
+  }
+
+  if (
+    bookRequest.currentPageNumber &&
+    !Number.isInteger(Number(bookRequest.currentPageNumber))
+  ) {
+    errors.push({
+      source: "currentPageNumber",
+      type: "INVALID_NUMBER",
+      message: "Current page number must be an integer",
+    });
+  }
+
+  return errors;
+}
+
+// @desc    Delete a book
+// route    DELETE /api/books/:bookID
+// @access  Private
+const deleteBook = asyncHandler(async (req, res) => {
+  const userID = req.user._id;
+  const bookID = { _id: req.params.bookID };
+
+  const book = await Book.findOne(bookID);
+  if (book === null) {
+    res.status(404);
+    throw new Error("Book not found");
+  }
+
+  if (book.userID != userID) {
+    res.status(400);
+    throw new Error("Book does not belong to that user");
+  }
+
+  await tryDeletingBook(bookID, res);
+});
+
+const tryDeletingBook = async (bookID, res) => {
+  try {
+    await Book.deleteOne(bookID);
+    res.status(200).json({ message: "Book deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to delete the book" });
+  }
+};
+
+export { createBook, deleteBook };

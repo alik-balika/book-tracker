@@ -24,9 +24,9 @@ const userDoesNotHaveAnObjectID = (err) => {
   return err.name === "CastError" && err.kind === "ObjectId";
 };
 
-const constructErrorResponse = (message, err) => {
+const constructErrorResponse = (errorMessage, err) => {
   const responseObject = {
-    message,
+    error: errorMessage,
   };
 
   if (process.env.NODE_ENV === "development") {
