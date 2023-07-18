@@ -1,10 +1,14 @@
 import express from "express";
-import { createBook, deleteBook } from "../controllers/bookController.js";
+import {
+  createBook,
+  deleteBook,
+  getBooksByUserID,
+} from "../controllers/bookController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/", protect, createBook);
+router.route("/").post(protect, createBook).get(protect, getBooksByUserID);
 router.delete("/:bookID", protect, deleteBook);
 
 export default router;

@@ -91,14 +91,9 @@ const deleteBook = asyncHandler(async (req, res) => {
   const bookID = { _id: req.params.bookID };
 
   const book = await Book.findOne(bookID);
-  if (book === null) {
+  if (book === null || book.userID != userID) {
     res.status(404);
     throw new Error("Book not found");
-  }
-
-  if (book.userID != userID) {
-    res.status(400);
-    throw new Error("Book does not belong to that user");
   }
 
   await tryDeletingBook(bookID, res);
@@ -113,4 +108,18 @@ const tryDeletingBook = async (bookID, res) => {
   }
 };
 
-export { createBook, deleteBook };
+// @desc    Get List of books for user in jwt token
+// route    GET /api/books
+// @access  Private
+const getBooksByUserID = asyncHandler(async (req, res) => {
+  const userID = req.user._id;
+
+  try {
+    const books = await Book.find({ userID }).select("-__v");
+    res.status(200).json({ books });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to retrieve books" });
+  }
+});
+
+export { createBook, deleteBook, getBooksByUserID };
