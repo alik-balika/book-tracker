@@ -1,5 +1,16 @@
 import asyncHandler from "express-async-handler";
 import Book from "../models/bookModel.js";
+import Joi from "joi";
+
+const createBookSchema = Joi.object({
+  title: Joi.string().required(),
+  author: Joi.string().required(),
+  description: Joi.string(),
+  isbn: Joi.string(),
+  numberOfPages: Joi.number().integer().min(1),
+  currentPageNumber: Joi.number().integer().min(1),
+  coverImagePath: Joi.string(),
+});
 
 // @desc    Create a new book for user in jwt token
 // route    POST /api/books
@@ -16,8 +27,12 @@ const createBook = asyncHandler(async (req, res) => {
     coverImagePath: req.body.coverImagePath,
   };
 
-  const errors = validateFieldsForCreateBookRequest(bookRequest);
-  if (errors.length !== 0) {
+  const { error } = createBookSchema.validate(bookRequest, {
+    abortEarly: false,
+  });
+
+  if (error) {
+    const errors = mapErrorDetails(error);
     res.status(400).json({ message: "Invalid request", errors });
   }
 
@@ -39,48 +54,15 @@ const createBook = asyncHandler(async (req, res) => {
   }
 });
 
-function validateFieldsForCreateBookRequest(bookRequest) {
-  const errors = [];
-
-  if (!bookRequest.title) {
-    errors.push({
-      source: "title",
-      type: "MISSING_FIELD",
-      message: "Title is required",
-    });
-  }
-
-  if (!bookRequest.author) {
-    errors.push({
-      source: "author",
-      type: "MISSING_FIELD",
-      message: "Author is required",
-    });
-  }
-
-  if (
-    bookRequest.numberOfPages &&
-    !Number.isInteger(Number(bookRequest.numberOfPages))
-  ) {
-    errors.push({
-      source: "numberOfPages",
-      type: "INVALID_NUMBER",
-      message: "Number of pages must be an integer",
-    });
-  }
-
-  if (
-    bookRequest.currentPageNumber &&
-    !Number.isInteger(Number(bookRequest.currentPageNumber))
-  ) {
-    errors.push({
-      source: "currentPageNumber",
-      type: "INVALID_NUMBER",
-      message: "Current page number must be an integer",
-    });
-  }
-
-  return errors;
+function mapErrorDetails(error) {
+  return error.details.map((err) => {
+    console.log(err.message);
+    return {
+      source: err.path.join("."),
+      type: err.type,
+      message: err.message,
+    };
+  });
 }
 
 // @desc    Delete a book
