@@ -4,6 +4,7 @@ import {
   deleteBook,
   getBookByBookID,
   getBooksByUserID,
+  updateBook,
 } from "../controllers/bookController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
@@ -13,6 +14,7 @@ router.route("/").post(protect, createBook).get(protect, getBooksByUserID);
 router
   .route("/:bookID")
   .delete(protect, deleteBook)
-  .get(protect, getBookByBookID);
+  .get(protect, getBookByBookID)
+  .put(protect, updateBook);
 
 export default router;
