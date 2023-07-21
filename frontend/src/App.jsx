@@ -1,7 +1,9 @@
+import Header from "./components/Header";
+
 const App = () => {
   return (
     <>
-      <h1>Book Tracker</h1>
+      <Header />
     </>
   );
 };
