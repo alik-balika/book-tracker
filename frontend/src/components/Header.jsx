@@ -1,53 +1,77 @@
-import { Navbar, Nav, Container } from "react-bootstrap";
-import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
-const Header = () => {
-  return (
-    <header>
-      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
-        <Container>
-          <Navbar.Brand>BOOK TRACKER</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+import { useState } from "react";
+import { Navbar, Nav, Container, Button } from "react-bootstrap";
 
-          {/* <LinkContainer to="/">
-            <Navbar.Brand>MERN AUTH</Navbar.Brand>
-          </LinkContainer> */}
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ms-auto">
+const Header = () => {
+  const [showVerticalButtons, setShowVerticalButtons] = useState(false);
+  const [navbarCollapsed, setNavbarCollapsed] = useState(true);
+
+  const handleNavbarClick = () => {
+    // needed so buttons don't prematurely move
+    // left before navbar fully collapses
+    if (showVerticalButtons) {
+      setTimeout(() => {
+        setShowVerticalButtons(false);
+      }, 250);
+    } else {
+      setShowVerticalButtons(true);
+    }
+    setNavbarCollapsed(!navbarCollapsed);
+  };
+
+  return (
+    <header style={{ backgroundColor: "lightgray", fontWeight: "bold" }}>
+      <Navbar expand="lg" collapseOnSelect>
+        <Container>
+          <Nav>
+            <Nav.Link href="/">
+              <Navbar.Brand
+                style={{
+                  fontSize: "1.8rem",
+                }}
+              >
+                SITE NAME
+              </Navbar.Brand>
+            </Nav.Link>
+          </Nav>
+          <Navbar.Toggle
+            aria-controls="basic-navbar-nav"
+            onClick={handleNavbarClick}
+          />
+          <Navbar.Collapse
+            id="basic-navbar-nav"
+            onToggle={() => {
+              console.log("Pressed");
+            }}
+          >
+            <Nav
+              className={`ms-auto ${
+                showVerticalButtons ? "flex-column center-vertical" : ""
+              }`}
+            >
               <Nav.Link href="/login">
-                <FaSignInAlt /> Sign In
+                <Button
+                  variant="dark"
+                  className="rounded-pill rounded-button"
+                  style={{
+                    paddingRight: 20,
+                    paddingLeft: 20,
+                    marginRight: showVerticalButtons ? 0 : 20,
+                    marginBottom: showVerticalButtons ? "10px" : "0",
+                  }}
+                >
+                  Sign In
+                </Button>
               </Nav.Link>
               <Nav.Link href="/register">
-                <FaSignOutAlt /> Sign Up
+                <Button
+                  variant="dark"
+                  className="rounded-pill rounded-button"
+                  style={{ paddingRight: 20, paddingLeft: 20 }}
+                >
+                  Sign Up
+                </Button>
               </Nav.Link>
             </Nav>
-
-            {/* <Nav className="ms-auto">
-              {userInfo ? (
-                <>
-                  <NavDropdown title={userInfo.name} id="username">
-                    <LinkContainer to="/profile">
-                      <NavDropdown.Item>Profile</NavDropdown.Item>
-                    </LinkContainer>
-                    <NavDropdown.Item onClick={logoutHandler}>
-                      Logout
-                    </NavDropdown.Item>
-                  </NavDropdown>
-                </>
-              ) : (
-                <>
-                  <LinkContainer to="/login">
-                    <Nav.Link>
-                      <FaSignInAlt /> Sign In
-                    </Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="/register">
-                    <Nav.Link>
-                      <FaSignOutAlt /> Sign Up
-                    </Nav.Link>
-                  </LinkContainer>
-                </>
-              )}
-            </Nav> */}
           </Navbar.Collapse>
         </Container>
       </Navbar>
