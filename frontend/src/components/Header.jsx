@@ -19,7 +19,7 @@ const Header = () => {
   };
 
   return (
-    <header style={{ backgroundColor: "lightgray", fontWeight: "bold" }}>
+    <header style={{ fontWeight: "bold" }}>
       <Navbar expand="lg" collapseOnSelect>
         <Container>
           <Nav>

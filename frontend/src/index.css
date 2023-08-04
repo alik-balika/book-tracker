@@ -1,0 +1,18 @@
+body {
+  font-family: "Ubuntu", sans-serif;
+}
+
+.rounded-button {
+  font-weight: bold;
+}
+
+.rounded-button:hover {
+  background-color: white;
+  color: black;
+}
+
+.center-vertical {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
