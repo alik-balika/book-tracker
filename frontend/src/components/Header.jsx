@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 const Header = () => {
   const [showVerticalButtons, setShowVerticalButtons] = useState(false);
@@ -23,7 +24,7 @@ const Header = () => {
       <Navbar expand="lg" collapseOnSelect>
         <Container>
           <Nav>
-            <Nav.Link href="/">
+            <LinkContainer to="/">
               <Navbar.Brand
                 style={{
                   fontSize: "1.8rem",
@@ -31,7 +32,7 @@ const Header = () => {
               >
                 SITE NAME
               </Navbar.Brand>
-            </Nav.Link>
+            </LinkContainer>
           </Nav>
           <Navbar.Toggle
             aria-controls="basic-navbar-nav"
@@ -48,29 +49,33 @@ const Header = () => {
                 showVerticalButtons ? "flex-column center-vertical" : ""
               }`}
             >
-              <Nav.Link href="/login">
-                <Button
-                  variant="dark"
-                  className="rounded-pill rounded-button"
-                  style={{
-                    paddingRight: 20,
-                    paddingLeft: 20,
-                    marginRight: showVerticalButtons ? 0 : 20,
-                    marginBottom: showVerticalButtons ? "10px" : "0",
-                  }}
-                >
-                  Sign In
-                </Button>
-              </Nav.Link>
-              <Nav.Link href="/register">
-                <Button
-                  variant="dark"
-                  className="rounded-pill rounded-button"
-                  style={{ paddingRight: 20, paddingLeft: 20 }}
-                >
-                  Sign Up
-                </Button>
-              </Nav.Link>
+              <LinkContainer to="/login">
+                <Nav.Link href="/login">
+                  <Button
+                    variant="dark"
+                    className="rounded-pill rounded-button"
+                    style={{
+                      paddingRight: 20,
+                      paddingLeft: 20,
+                      marginRight: showVerticalButtons ? 0 : 20,
+                      marginBottom: showVerticalButtons ? "10px" : "0",
+                    }}
+                  >
+                    Sign In
+                  </Button>
+                </Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/register">
+                <Nav.Link href="/register">
+                  <Button
+                    variant="dark"
+                    className="rounded-pill rounded-button"
+                    style={{ paddingRight: 20, paddingLeft: 20 }}
+                  >
+                    Sign Up
+                  </Button>
+                </Nav.Link>
+              </LinkContainer>
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -1,5 +1,6 @@
 import { Container, Button, Row, Col, Card } from "react-bootstrap";
 import { FaBook, FaPen, FaSearch } from "react-icons/fa";
+import { LinkContainer } from "react-router-bootstrap";
 
 const HomeScreen = () => {
   // Sample data for featured books (Replace this with real data from your backend)
@@ -35,9 +36,11 @@ const HomeScreen = () => {
                 Keep track of your favorite books and notes. Never lose your
                 reading progress again!
               </p>
-              <Button variant="dark" href="/login" className="rounded-pill">
-                Get Started
-              </Button>
+              <LinkContainer to="/login">
+                <Button variant="dark" className="rounded-pill">
+                  Get Started
+                </Button>
+              </LinkContainer>
             </Col>
             <Col md={6}>
               <img src="/logo.png" alt="logo" />
