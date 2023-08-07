@@ -89,17 +89,17 @@ const HomeScreen = () => {
       <div style={{ backgroundColor: "#f1f1f1" }}>
         <Container style={{ paddingTop: "3rem" }}>
           <Row>
-            {featuredBooks.map((feature, index) => (
+            {featuredBooks.map((book, index) => (
               <Col key={index} md={4} style={{ marginBottom: "1.5rem" }}>
                 <Card>
                   <Card.Body>
                     <Card.Title style={{ fontWeight: "bold" }}>
-                      {feature.title}
+                      {book.title}
                     </Card.Title>
                     <Card.Subtitle>
-                      <small className="text-muted">{feature.author}</small>
+                      <small className="text-muted">{book.author}</small>
                     </Card.Subtitle>
-                    <Card.Text>{feature.description}</Card.Text>
+                    <Card.Text>{book.description}</Card.Text>
                   </Card.Body>
                 </Card>
               </Col>
