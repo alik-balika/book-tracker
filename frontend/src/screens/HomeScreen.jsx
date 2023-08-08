@@ -56,7 +56,7 @@ const HomeScreen = () => {
             marginBottom: "3rem",
           }}
         >
-          <div style={{ marginBottom: "2rem" }}>
+          <div style={{ marginBottom: "2rem" }} className="move-right">
             <div className="d-flex align-items-center">
               <FaBook style={{ fontSize: "2rem", marginRight: "1rem" }} />
               <h5 style={{ fontWeight: "bold" }}>
@@ -65,7 +65,10 @@ const HomeScreen = () => {
             </div>
             <p style={{ marginLeft: "4rem" }}>Never lose your place again</p>
           </div>
-          <div style={{ marginBottom: "2rem", textAlign: "right" }}>
+          <div
+            style={{ marginBottom: "2rem", textAlign: "right" }}
+            className="move-left"
+          >
             <div className="d-flex align-items-center justify-content-end">
               <h5 style={{ fontWeight: "bold" }}>
                 Add and organize your notes for better learning
@@ -76,7 +79,7 @@ const HomeScreen = () => {
               Keep your thoughts organized as you read
             </p>
           </div>
-          <div style={{ marginBottom: "2rem" }}>
+          <div style={{ marginBottom: "2rem" }} className="move-right">
             <div className="d-flex align-items-center">
               <FaSearch style={{ fontSize: "2rem", marginRight: "1rem" }} />
               <h5 style={{ fontWeight: "bold" }}>
@@ -94,7 +97,7 @@ const HomeScreen = () => {
           <Row>
             {featuredBooks.map((book, index) => (
               <Col key={index} md={4} style={{ marginBottom: "1.5rem" }}>
-                <Card>
+                <Card className="shadow">
                   <Card.Body>
                     <Card.Title style={{ fontWeight: "bold" }}>
                       {book.title}

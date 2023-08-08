@@ -26,3 +26,27 @@ body {
 .styled-link:hover {
   color: darkslateblue;
 }
+
+.card {
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.move-right {
+  transition: transform 0.3s ease-in-out;
+}
+
+.move-right:hover {
+  transform: translateX(15px);
+}
+
+.move-left {
+  transition: transform 0.3s ease-in-out;
+}
+
+.move-left:hover {
+  transform: translateX(-15px);
+}
