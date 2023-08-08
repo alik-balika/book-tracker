@@ -16,3 +16,13 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.styled-link {
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.styled-link:hover {
+  color: darkslateblue;
+}
