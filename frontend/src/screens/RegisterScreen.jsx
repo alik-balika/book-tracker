@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 
-const LoginScreen = () => {
+const RegisterScreen = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const submitHandler = async (e) => {
     console.log("submit");
@@ -13,8 +15,19 @@ const LoginScreen = () => {
 
   return (
     <FormContainer>
-      <h1>Sign In</h1>
+      <h1>Sign Up</h1>
       <Form onSubmit={submitHandler} className="d-flex flex-column">
+        <Form.Group className="my-2" controlId="name">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type="name"
+            placeholder="Enter Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="border-dark"
+          ></Form.Control>
+        </Form.Group>
+
         <Form.Group className="my-2" controlId="email">
           <Form.Label>Email Address</Form.Label>
           <Form.Control
@@ -37,15 +50,26 @@ const LoginScreen = () => {
           ></Form.Control>
         </Form.Group>
 
+        <Form.Group className="my-2" controlId="confirmPassword">
+          <Form.Label>Confirm Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            className="border-dark"
+          ></Form.Control>
+        </Form.Group>
+
         <Button variant="dark" className="rounded-pill rounded-button mt-3">
-          Sign In
+          Sign Up
         </Button>
 
         <Row className="py-3">
           <Col className="text-secondary">
-            New Customer?{" "}
-            <Link to="/register" className="styled-link">
-              Register
+            Already have an account?{" "}
+            <Link to="/login" className="styled-link">
+              Sign In
             </Link>
           </Col>
         </Row>
@@ -54,4 +78,4 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
+export default RegisterScreen;

@@ -27,11 +27,11 @@ body {
   color: darkslateblue;
 }
 
-.card {
+.lift-card {
   transition: transform 0.3s ease-in-out;
 }
 
-.card:hover {
+.lift-card:hover {
   transform: translateY(-10px);
 }
 

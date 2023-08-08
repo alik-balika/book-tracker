@@ -36,7 +36,7 @@ const HomeScreen = () => {
                 Keep track of your favorite books and notes. Never lose your
                 reading progress again!
               </p>
-              <LinkContainer to="/login">
+              <LinkContainer to="/register">
                 <Button variant="dark" className="rounded-pill">
                   Get Started
                 </Button>
@@ -97,7 +97,7 @@ const HomeScreen = () => {
           <Row>
             {featuredBooks.map((book, index) => (
               <Col key={index} md={4} style={{ marginBottom: "1.5rem" }}>
-                <Card className="shadow">
+                <Card className="shadow lift-card">
                   <Card.Body>
                     <Card.Title style={{ fontWeight: "bold" }}>
                       {book.title}
