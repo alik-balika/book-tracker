@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Row, Col, Container } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import { setCredentials } from "../slices/authSlice";
 import { useUpdateUserMutation } from "../slices/usersApiSlice";
+import Sidebar from "../components/Sidebar";
 
 const ProfileScreen = () => {
   const [name, setName] = useState("");
@@ -45,64 +46,79 @@ const ProfileScreen = () => {
   };
 
   return (
-    <FormContainer>
-      <h1>Update Profile</h1>
-      <Form onSubmit={submitHandler} className="d-flex flex-column">
-        <Form.Group className="my-2" controlId="name">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            type="name"
-            placeholder="Enter Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="border-dark"
-          ></Form.Control>
-        </Form.Group>
-
-        <Form.Group className="my-2" controlId="email">
-          <Form.Label>Email Address</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="border-dark"
-          ></Form.Control>
-        </Form.Group>
-
-        <Form.Group className="my-2" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Enter Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="border-dark"
-          ></Form.Control>
-        </Form.Group>
-
-        <Form.Group className="my-2" controlId="confirmPassword">
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            className="border-dark"
-          ></Form.Control>
-        </Form.Group>
-
-        {isLoading && <Loader />}
-
-        <Button
-          variant="dark"
-          className="rounded-pill rounded-button mt-3"
-          type="submit"
+    <Container fluid>
+      <Row style={{ height: "84.3vh" }}>
+        <Col
+          xs={12}
+          className="d-none d-lg-block text-bg-secondary"
+          style={{
+            width: "250px",
+          }}
         >
-          Update
-        </Button>
-      </Form>
-    </FormContainer>
+          <Sidebar />
+        </Col>
+        <Col>
+          <FormContainer>
+            <h1>Update Profile</h1>
+            <Form onSubmit={submitHandler} className="d-flex flex-column">
+              <Form.Group className="my-2" controlId="name">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  type="name"
+                  placeholder="Enter Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="border-dark"
+                ></Form.Control>
+              </Form.Group>
+
+              <Form.Group className="my-2" controlId="email">
+                <Form.Label>Email Address</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Enter Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="border-dark"
+                ></Form.Control>
+              </Form.Group>
+
+              <Form.Group className="my-2" controlId="password">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Enter Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="border-dark"
+                ></Form.Control>
+              </Form.Group>
+
+              <Form.Group className="my-2" controlId="confirmPassword">
+                <Form.Label>Confirm Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Confirm Password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="border-dark"
+                ></Form.Control>
+              </Form.Group>
+
+              {isLoading && <Loader />}
+
+              <Button
+                variant="dark"
+                className="rounded-pill rounded-button mt-3"
+                type="submit"
+              >
+                Update
+              </Button>
+            </Form>
+          </FormContainer>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

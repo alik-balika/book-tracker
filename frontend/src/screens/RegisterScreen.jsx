@@ -23,7 +23,7 @@ const RegisterScreen = () => {
 
   useEffect(() => {
     if (userInfo) {
-      navigate("/");
+      navigate("/library");
     }
   }, [navigate, userInfo]);
 

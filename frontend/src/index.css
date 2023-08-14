@@ -50,3 +50,18 @@ body {
 .move-left:hover {
   transform: translateX(-15px);
 }
+
+.sidebar-link {
+  color: white;
+  width: 100%;
+  border-bottom: 1px solid #555;
+}
+
+.sidebar-link:hover {
+  background-color: #555; /* Change background color on hover */
+  color: white;
+}
+
+.sidebar-link.active {
+  background-color: #555;
+}
