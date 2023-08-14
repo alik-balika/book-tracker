@@ -6,6 +6,7 @@ const createBookSchema = Joi.object({
   userID: Joi.object().required(),
   title: Joi.string().required(),
   author: Joi.string().required(),
+  categoryID: Joi.string(),
   description: Joi.string(),
   isbn: Joi.string(),
   numberOfPages: Joi.number().integer().min(1),
@@ -21,6 +22,7 @@ const createBook = asyncHandler(async (req, res) => {
     userID: req.user._id,
     title: req.body.title,
     author: req.body.author,
+    categoryID: req.body.categoryID,
     description: req.body.description,
     isbn: req.body.isbn,
     numberOfPages: req.body.numberOfPages,
@@ -124,6 +126,7 @@ const updateBookSchema = Joi.object({
   userID: Joi.object(),
   title: Joi.string(),
   author: Joi.string(),
+  categoryID: Joi.string(),
   description: Joi.string(),
   isbn: Joi.string(),
   numberOfPages: Joi.number().integer().min(1),
@@ -174,6 +177,7 @@ function updateBookFieldsIfInBody(book, req) {
   book.title = req.body.title || book.title;
   book.author = req.body.author || book.author;
   book.description = req.body.description || book.description;
+  book.categoryID = req.body.categoryID || book.categoryID;
   book.isbn = req.body.isbn || book.isbn;
   book.numberOfPages = req.body.numberOfPages || book.numberOfPages;
   book.currentPageNumber = req.body.currentPageNumber || book.currentPageNumber;
