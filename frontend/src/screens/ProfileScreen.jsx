@@ -47,7 +47,7 @@ const ProfileScreen = () => {
 
   return (
     <Container fluid>
-      <Row style={{ height: "84.3vh" }}>
+      <Row>
         <Col
           xs={12}
           className="d-none d-lg-block text-bg-secondary"

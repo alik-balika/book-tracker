@@ -4,12 +4,13 @@ import Sidebar from "../components/Sidebar";
 const LibraryScreen = () => {
   return (
     <Container fluid>
-      <Row style={{ height: "84.3vh" }}>
+      <Row>
         <Col
           xs="auto"
-          className="d-none d-md-block text-bg-secondary"
+          className="d-none d-lg-block text-bg-secondary"
           style={{
             width: "250px",
+            height: "100vh",
           }}
         >
           <Sidebar />

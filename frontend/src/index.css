@@ -63,5 +63,6 @@ body {
 }
 
 .sidebar-link.active {
+  color: white;
   background-color: #555;
 }

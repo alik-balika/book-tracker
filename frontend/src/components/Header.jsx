@@ -29,7 +29,7 @@ const Header = () => {
         <Container>
           <Nav>
             <LinkContainer to="/">
-              <Navbar.Brand>SITE NAME</Navbar.Brand>
+              <Navbar.Brand>BookNest</Navbar.Brand>
             </LinkContainer>
           </Nav>
           <Navbar.Toggle
@@ -46,7 +46,7 @@ const Header = () => {
                 <>
                   {!navbarCollapsed && (
                     <div
-                      className="d-lg-none text-bg-secondary"
+                      className="d-lg-none text-bg-secondary mt-4"
                       style={{ width: "100%" }}
                     >
                       {/* Show only on mobile screens */}

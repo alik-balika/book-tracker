@@ -1,8 +1,22 @@
+import { useEffect } from "react";
 import { Container, Button, Row, Col, Card } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { FaBook, FaPen, FaSearch } from "react-icons/fa";
 import { LinkContainer } from "react-router-bootstrap";
+import Footer from "../components/Footer";
 
 const HomeScreen = () => {
+  const navigate = useNavigate();
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/library");
+    }
+  }, [navigate, userInfo]);
+
   // Sample data for featured books (Replace this with real data from your backend)
   const featuredBooks = [
     {
@@ -31,7 +45,7 @@ const HomeScreen = () => {
         <Container>
           <Row className="text-center text-md-start">
             <Col md={6}>
-              <h1 style={{ paddingTop: 100 }}>Welcome to SITE NAME</h1>
+              <h1 style={{ paddingTop: 100 }}>Welcome to BookNest</h1>
               <p>
                 Keep track of your favorite books and notes. Never lose your
                 reading progress again!
@@ -113,6 +127,7 @@ const HomeScreen = () => {
           </Row>
         </Container>
       </div>
+      <Footer />
     </div>
   );
 };

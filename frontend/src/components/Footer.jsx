@@ -8,9 +8,9 @@ const Footer = () => {
           <Col md={6}>
             <h5>About Us</h5>
             <p>
-              Welcome to SITE NAME, your go-to platform for effortlessly
-              managing your reading progress and notes. Enhance your reading
-              experience with us.
+              Welcome to BookNest, your go-to platform for effortlessly managing
+              your reading progress and notes. Enhance your reading experience
+              with us.
             </p>
           </Col>
           <Col md={6}>
