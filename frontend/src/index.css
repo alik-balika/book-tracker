@@ -66,3 +66,12 @@ body {
   color: white;
   background-color: #555;
 }
+
+.library-link {
+  text-decoration: none;
+  border-bottom: 1px solid gray;
+  padding: 20px;
+  width: 80%;
+  margin-top: 30px;
+  text-align: center;
+}

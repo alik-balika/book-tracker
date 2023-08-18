@@ -1,4 +1,5 @@
 import { Col, Row, Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 
 const LibraryScreen = () => {
@@ -15,13 +16,25 @@ const LibraryScreen = () => {
         >
           <Sidebar />
         </Col>
-        <Col
-          style={{
-            border: "5px solid green",
-          }}
-        >
-          <h1>test</h1>
-          <h2>Test 2</h2>
+        <Col>
+          <h1 className="mt-3 ms-5">
+            <strong>Library</strong>
+          </h1>
+
+          <div className="d-flex flex-column ms-5 mb-5">
+            <Link to="/library/all" className="library-link">
+              All
+            </Link>
+            <Link to="/library/to-read" className="library-link">
+              To Read
+            </Link>
+            <Link to="/library/reading" className="library-link">
+              Reading
+            </Link>
+            <Link to="/library/Finished" className="library-link">
+              Finished
+            </Link>
+          </div>
         </Col>
       </Row>
     </Container>
